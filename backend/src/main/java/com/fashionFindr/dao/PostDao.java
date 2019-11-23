@@ -24,4 +24,6 @@ public interface PostDao extends MongoRepository<Post, String> {
 //    List<Post> getUserPost(User user);
 
     Post save(Post post);
+    Post findByPostID(int postID);
+    List<Post> findByCorrectlyAnswered(int correctly_answered);
 }

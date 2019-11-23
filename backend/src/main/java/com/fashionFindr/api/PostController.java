@@ -5,6 +5,7 @@ import com.fashionFindr.model.Post;
 import com.fashionFindr.model.User;
 import com.fashionFindr.service.PostService;
 import com.fashionFindr.service.UserService;
+import javafx.geometry.Pos;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,28 @@ public class PostController {
 //        taking the request body sent in and send to the USer and the JSon object turns into an Post
         postService.createPost(post);
     }
+
+    @GetMapping(value = "/getPost/{postID}")
+    public Post getPost(@PathVariable("postID") int postID){
+        return postService.getPost(postID);
+    }
+
+    @GetMapping ("getSwiperPosts")
+    public List<Post> getSwiperPosts(){
+        return postService.getUnansweredPosts();
+    }
+
+    @PostMapping(value="/updateCorrectlyAnswered/{username}/{postID}/{correctlyAnswered}")
+    public void updateCorrectlyAnswered(@PathVariable("postID") int postID, @PathVariable("username") String username,
+                                        @PathVariable("correctlyAnswered") int correctlyAnswered){
+        postService.updateCorrectlyAnswered(username, postID, correctlyAnswered);
+    }
+
+    @GetMapping ("getExplorePosts")
+    public List<Post> getExplorePosts(){
+        return postService.getAllPosts();
+    }
+
 
 //    @GetMapping("getUnansweredPosts")
 //    public List<Post> getUnansweredPosts(){

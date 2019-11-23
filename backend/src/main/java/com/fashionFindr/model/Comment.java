@@ -1,35 +1,43 @@
 package com.fashionFindr.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Document(collection = "comments")
 public class Comment {
-    private final String commentID;
-    private final String postID;
+    @Id
+    private String id;
+    private int commentID;
+    private final int postID;
     private final String username;
     private final String content;
     private int chosenByOP;
     private List<Reply> listOfReply;
+    private int upvote;
 
-    public Comment(@JsonProperty("commentID") String commentID,
-                   @JsonProperty("postID") String postID,
+    public Comment(
+//            @JsonProperty("commentID") String commentID,
+                   @JsonProperty("postID") int postID,
                    @JsonProperty("username") String username,
-                   @JsonProperty("content") String content,
-                   @JsonProperty("chosenByOP") int chosenByOP,
-                   @JsonProperty("listOfReply") List<Reply> listOfReply) {
-        this.commentID = commentID;
+                   @JsonProperty("content") String content
+//                   @JsonProperty("chosenByOP") int chosenByOP
+//                   @JsonProperty("listOfReply") List<Reply> listOfReply
+    ) {
+        this.commentID = 0;
         this.username = username;
         this.postID = postID;
         this.content = content;
-        this.chosenByOP = chosenByOP;
+        this.chosenByOP = 0;
         this.listOfReply = new ArrayList<Reply>();
+        this.upvote = 0;
 //        empty list when comment is first created
     }
 
-    public String getPostID() {
+    public int getPostID() {
         return postID;
     }
 
@@ -45,7 +53,7 @@ public class Comment {
         return listOfReply;
     }
 
-    public String getCommentID() {
+    public int getCommentID() {
         return commentID;
     }
 
@@ -53,4 +61,15 @@ public class Comment {
         return username;
     }
 
+    public void setCommentID(int newCommentID){
+        this.commentID = newCommentID;
     }
+
+    public int getUpvote() {
+        return upvote;
+    }
+
+    public void setUpvote(int newUpvote){
+        upvote = newUpvote;
+    }
+}

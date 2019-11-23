@@ -33,6 +33,7 @@ public class UserController {
         }
 
     }
+
 //
 //    @GetMapping
 //    public List<User> getAllUser(){
@@ -69,6 +70,26 @@ public class UserController {
         System.out.println("getuserinfo user controller");
         return userService.getUserInfo(username);
 
+    }
+
+    @GetMapping(value = "/getUserFavorites/{username}")
+    public List<Post> getUserFavorites(@PathVariable("username") String username){
+        return userService.getUserFavorites(username);
+    }
+
+    @PostMapping(value = "/addFavorites/{username}/{postID}")
+    public void addFavorites(@PathVariable("username") String username, @PathVariable("postID") int postID){
+        userService.addUserFavorites(username, postID);
+    }
+
+    @GetMapping(value = "/getUserMatches/{username}")
+    public List<Post> getUserMatches(@PathVariable("username") String username){
+        return userService.getUserMatches(username);
+    }
+
+    @GetMapping(value = "/getUserPosts/{username}")
+    public List<Post> getUserPosts(@PathVariable("username") String username){
+        return userService.getUserPosts(username);
     }
 
 }

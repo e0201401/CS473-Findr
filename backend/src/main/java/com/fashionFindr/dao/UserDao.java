@@ -20,8 +20,8 @@ public interface UserDao extends MongoRepository<User, String> {
 //    List<Post> getUserPost(User user);
 //    User getUserInfo(String username);
     User findByUsername(String username);
-    User insert(User user);
-//    User save(User user);
+//    User insert(User user);
+    User save(User user);
 
 
 

@@ -1,37 +1,42 @@
 package com.fashionFindr.model;
 
-import com.fashionFindr.service.UserService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import javax.annotation.Generated;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Document(collection = "posts")
 public class Post {
 //    @Id
-    private int post_ID;
+@Id
+private String id;
+    private int postID;
 //    private User user;
     private final String title;
     private final String imageSrc;
     private final String description;
-    private final int correctly_answered;
+    private int correctlyAnswered;
     private final String username;
+    private List<Integer> commentIDs;
 
     public Post(
-//            @JsonProperty("post_ID") int post_ID,
                 @JsonProperty("username") String username,
                 @JsonProperty("title")String title,
                 @JsonProperty("imageSrc") String imageSrc,
-                @JsonProperty("description") String description,
-                @JsonProperty("correctly_answered") int correctly_answered) {
-        this.post_ID = 0;
+                @JsonProperty("description") String description
+//                @JsonProperty("correctlyAnswered") int correctlyAnswered
+    ) {
+        this.postID = 0;
 //        this.user = userService.getUserFromUsername(username);
         this.title = title;
         this.imageSrc = imageSrc;
         this.description = description;
-        this.correctly_answered = correctly_answered;
+        this.correctlyAnswered = 0;
         this.username = username;
+        this.commentIDs = new ArrayList<>();
 //        System.out.println("second post constructor");
     }
 
@@ -47,12 +52,12 @@ public class Post {
         return description;
     }
 
-    public int getCorrectly_answered() {
-        return correctly_answered;
+    public int getCorrectlyAnswered() {
+        return correctlyAnswered;
     }
 
-    public int getPost_ID() {
-        return post_ID;
+    public int getPostID() {
+        return postID;
     }
 
     public String getTitle() {
@@ -62,7 +67,19 @@ public class Post {
     public String getUsername() {
         return username;
     }
-    public void setPost_ID(int new_post_ID){
-        post_ID = new_post_ID;
+    public void setPostID(int new_post_ID){
+        postID = new_post_ID;
+    }
+
+    public void setCommentIDs(List<Integer> commentIDs) {
+        this.commentIDs = commentIDs;
+    }
+
+    public List<Integer> getCommentIDs(){
+        return this.commentIDs;
+    }
+
+    public void setCorrectlyAnswered(int newCorrectlyAnswered){
+        correctlyAnswered = newCorrectlyAnswered;
     }
 }

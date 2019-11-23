@@ -1,6 +1,7 @@
 package com.fashionFindr.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.ArrayList;
@@ -9,6 +10,8 @@ import java.util.List;
 
 @Document(collection="users")
 public class User {
+    @Id
+    private String id;
     private final String username;
     private final String password;
     private int reputation;
@@ -54,5 +57,15 @@ public class User {
 
     public void setReputation(int new_reputation){
         reputation = new_reputation;
+    }
+
+    public void setUserFavorites(int postID){
+        userFavorites.add(postID);
+    }
+    public void setUserMatches(int postID){
+        userMatches.add(postID);
+    }
+    public void setUserPosts(int postID){
+        userPosts.add(postID);
     }
 }
